@@ -1,8 +1,14 @@
 {
-  "name": "edge-node",
+  "name": "vpn-connector",
+  "description": "A vpn connector based n2n-edge",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.2",
   "type": "module",
+  "author": {
+    "name": "_ChingC",
+    "email": "chingc.ccmail@gmail.com"
+  },
+  "license": "GPL-3.0 license",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",

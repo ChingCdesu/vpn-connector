@@ -7,8 +7,8 @@
     "withGlobalTauri": false
   },
   "package": {
-    "productName": "edge-node",
-    "version": "0.0.1"
+    "productName": "vpn-connector",
+    "version": "0.0.2"
   },
   "tauri": {
     "allowlist": {
@@ -61,7 +61,8 @@
       }
     },
     "security": {
-      "csp": null
+      "csp": "default-src 'self'",
+      "devCsp": "default-src 'self'"
     },
     "updater": {
       "active": false

@@ -81,7 +81,7 @@ onUnmounted(() => {
 <template>
   <PageProvider>
     <NLayout has-sider class="app-root layout">
-      <NLayoutSider :width="400">
+      <NLayoutSider width="38%">
         <NScrollbar class="scrollable layout">
           <SettingForm
             v-model:config="config"

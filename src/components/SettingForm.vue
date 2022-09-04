@@ -52,7 +52,7 @@ function handleButtonClick() {
 function handleConfigUpdate(key: string, value: string | number | null) {
   const origin = { ...props.config }
   const updated = _.set(origin, key, value)
-  localStorage.setItem('edge', JSON.stringify(updated))
+  localStorage.setItem("edge", JSON.stringify(updated))
   emit("update:config", updated)
 }
 </script>
@@ -93,6 +93,7 @@ function handleConfigUpdate(key: string, value: string | number | null) {
         <NFormItem label="Service Key">
           <NInput
             type="password"
+            show-password-on="click"
             clearable
             :value="props.config.serviceKey"
             @update:value="(value) => handleConfigUpdate('serviceKey', value)"
@@ -101,6 +102,7 @@ function handleConfigUpdate(key: string, value: string | number | null) {
         <NFormItem label="Public Key">
           <NInput
             type="password"
+            show-password-on="click"
             clearable
             :value="props.config.publicKey"
             @update:value="(value) => handleConfigUpdate('publicKey', value)"
@@ -116,6 +118,7 @@ function handleConfigUpdate(key: string, value: string | number | null) {
         <NFormItem label="Password">
           <NInput
             type="password"
+            show-password-on="click"
             clearable
             :value="props.config.password"
             @update:value="(value) => handleConfigUpdate('password', value)"
@@ -130,7 +133,10 @@ function handleConfigUpdate(key: string, value: string | number | null) {
           />
         </NFormItem>
         <NFormItem label=" ">
-          <NButton @click="handleButtonClick">
+          <NButton
+            @click="handleButtonClick"
+            :type="props.status === 'connected' ? 'error' : 'primary'"
+          >
             {{ props.status === "connected" ? "Disconnect" : "Connect" }}
           </NButton>
         </NFormItem>

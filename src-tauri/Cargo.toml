@@ -1,10 +1,10 @@
 [package]
-name = "edge-node"
-version = "0.0.0"
-description = "A Tauri App"
-authors = ["you"]
-license = ""
-repository = ""
+name = "vpn-connector"
+version = "0.0.2"
+description = "A vpn connector based n2n-edge"
+authors = ["_ChingC <chingc.ccmail@gmail.com>"]
+license = "GPL-3.0 license"
+repository = "https://github.com/ChingCdesu/vpn-connector.git"
 edition = "2021"
 rust-version = "1.57"
 
