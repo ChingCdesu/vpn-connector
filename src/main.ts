@@ -1,8 +1,9 @@
-import { createApp } from "vue"
-import App from "./App.vue"
-
+import { createApp } from 'vue'
+import Main from './Main.vue'
 import './assets/styles/style.less'
 
-const app = createApp(App)
-
-app.mount("#app")
+createApp(Main)
+  .mount('#app')
+  // .$nextTick(() => {
+  //   postMessage({ payload: 'removeLoading' }, '*')
+  // })
