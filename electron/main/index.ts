@@ -117,11 +117,12 @@ ipcMain.handle("set-sudo-password", (event: Event, pass: string) => {
 
 ipcMain.handle("connect-supernode", (event, path: string, args: string[]) => {
   killCp();
-  const cmd = [path, ...args].map((a) => `'${a}'`).join(" ");
+  const splitter = process.platform === 'win32' ? '\"' : '\''; 
+  const cmd = [path, ...args].map((a) => `${splitter}${a}${splitter}`).join(" ");
   if (process.platform === 'win32') {
-    cp = exec(cmd)
+    cp = exec(cmd, { encoding: 'buffer' })
   } else {
-    cp = exec(`echo '${sudoPassword}' | sudo -S ${cmd}`);
+    cp = exec(`echo '${sudoPassword}' | sudo -S ${cmd}`, { encoding: 'buffer' });
   }
 
   const onClose = (why: string) => {
