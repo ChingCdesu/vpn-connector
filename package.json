@@ -45,6 +45,7 @@
     "execa": "^6.1.0",
     "iconv-lite": "^0.6.3",
     "is-elevated": "^4.0.0",
-    "sudo-prompt": "^9.2.1"
+    "sudo-prompt": "^9.2.1",
+    "tree-kill": "^1.2.2"
   }
 }

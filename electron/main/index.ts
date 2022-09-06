@@ -1,9 +1,10 @@
 import { app, BrowserWindow, shell, ipcMain } from "electron";
-import { ChildProcess, exec } from "child_process";
+import { ChildProcess, exec, spawn } from "child_process";
 import { release } from "os";
 import { join } from "path";
 import iconv from "iconv-lite";
 import isElevated from "is-elevated";
+import kill from 'tree-kill';
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith("6.1")) app.disableHardwareAcceleration();
@@ -29,7 +30,7 @@ export const ROOT_PATH = {
 };
 
 let win: BrowserWindow | null = null;
-let cp: ChildProcess | null = null;
+let childProcess: ChildProcess | null = null;
 let sudoPassword = "";
 // Here, you can also use other preload
 const preload = join(__dirname, "../preload/index.js");
@@ -39,9 +40,9 @@ const textDecoder = (buf: Buffer): string =>
   iconv.decode(buf, process.platform === "win32" ? "gb2312" : "utf8");
 
 const killCp = () => {
-  if (cp) {
+  if (childProcess) {
     if (process.platform === "win32") {
-      cp.kill();
+      kill(childProcess.pid)
     } else {
       exec(`echo '${sudoPassword}' | sudo -S killall edge`);
     }
@@ -117,38 +118,43 @@ ipcMain.handle("set-sudo-password", (event: Event, pass: string) => {
 
 ipcMain.handle("connect-supernode", (event, path: string, args: string[]) => {
   killCp();
-  const splitter = process.platform === 'win32' ? '\"' : '\''; 
+  const splitter = process.platform === 'win32' ? '\"' : '\'';
   const cmd = [path, ...args].map((a) => `${splitter}${a}${splitter}`).join(" ");
   if (process.platform === 'win32') {
-    cp = exec(cmd, { encoding: 'buffer' })
+    childProcess = exec(cmd, {
+      encoding: 'buffer',
+      shell: 'cmd'
+    })
   } else {
-    cp = exec(`echo '${sudoPassword}' | sudo -S ${cmd}`, { encoding: 'buffer' });
+    childProcess = exec(`echo '${sudoPassword}' | sudo -S ${cmd}`, { 
+      encoding: 'buffer',
+      shell: 'bash'
+    });
   }
 
   const onClose = (why: string) => {
     win.webContents.send("log", why);
     win.webContents.send("disconnected");
-    cp = null;
+    childProcess = null;
   };
 
-  cp.on("spawn", () => {
+  childProcess.on("spawn", () => {
     win.webContents.send("connected");
   });
 
-  cp.stdout.on("data", (line) => {
+  childProcess.stdout.on("data", (line) => {
     win.webContents.send("log", textDecoder(line));
   });
 
-  cp.stderr.on("data", (line) => {
+  childProcess.stderr.on("data", (line) => {
     win.webContents.send("log", textDecoder(line));
   });
 
-  cp.on("error", (error) => {
-    console.log(error);
+  childProcess.on("error", (error) => {
     onClose("[ERROR] " + error + "\n");
   });
 
-  cp.on("close", () => {
+  childProcess.on("close", () => {
     onClose("edge process is exited\n");
   });
 });
