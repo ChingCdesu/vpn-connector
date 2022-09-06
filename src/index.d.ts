@@ -1,4 +1,5 @@
 interface EdgeConfiguration {
+  edgePath: string
   supernodeHost: string
   supernodePort: number
   community: string

@@ -66,6 +66,14 @@ function handleConfigUpdate(key: string, value: string | number | null) {
     </NLayoutHeader>
     <NLayoutContent>
       <NForm label-align="right" label-placement="left" label-width="auto">
+        <NFormItem label="edge Location" required>
+          <NInput
+            :value="props.config.edgePath"
+            @update:value="
+              (value) => handleConfigUpdate('edgePath', value)
+            "
+          />
+        </NFormItem>
         <NFormItem label="Supernode Host" required>
           <NInput
             :value="props.config.supernodeHost"

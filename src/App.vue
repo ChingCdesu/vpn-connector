@@ -21,6 +21,7 @@ const showPasswordModal = ref(false);
 const password = ref("");
 
 const config: Ref<EdgeConfiguration> = ref({
+  edgePath: "edge",
   supernodeHost: "",
   supernodePort: 5432,
   community: "",
@@ -50,7 +51,7 @@ async function connect() {
     args.push(config.value.cipher);
   }
 
-  window.ipcRenderer.invoke("connect-supernode", "edge", args);
+  window.ipcRenderer.invoke("connect-supernode", config.value.edgePath, args);
 }
 
 async function disconnect() {
