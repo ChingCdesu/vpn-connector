@@ -2517,17 +2517,17 @@ verror@^1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vite-plugin-electron-renderer@0.9.0:
-  version "0.9.0"
-  resolved "https://registry.npmmirror.com/vite-plugin-electron-renderer/-/vite-plugin-electron-renderer-0.9.0.tgz#12da19cf7c6fdb0d1b271a91873ee58883a264cb"
-  integrity sha512-Vc9rB3i0zlw32n5UGfoLmHAOZdH0ZbbA+tI0TPn36HbwXtmsfu+LVLqeccZh88iaQ3VJIm00rUDGMvswN2PLRg==
+vite-plugin-electron-renderer@0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/vite-plugin-electron-renderer/-/vite-plugin-electron-renderer-0.9.3.tgz#f9d50a810306ce62886b6dec54d3989ce71f9193"
+  integrity sha512-RSZBK2+IIVY/7pluyAB6Uavf/e9tXck7tJzSvS/XMDrbwmphXmr0IPCbDd9uqDlq3GqP/sxx+tdJgWs72F40Tg==
 
-vite-plugin-electron@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.npmmirror.com/vite-plugin-electron/-/vite-plugin-electron-0.9.2.tgz#b7cfae4af3dbaafc114c7e80cdce372d150be156"
-  integrity sha512-8xUDn+Cdd1aFfCINpT9lRJNA9YaxIBW/Tlj4ALfPibFsntxEozJE4GpCog9bWhh8yMVd/ORsZgD6IbHYLwvzWg==
+vite-plugin-electron@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.yarnpkg.com/vite-plugin-electron/-/vite-plugin-electron-0.9.3.tgz#72e697c508103e64ddb73a6dc3480d21c4f5efab"
+  integrity sha512-uPuYnlVqoHy+czXPyxlriapeO2+xGFBkyqnE/J8MDCMvXHafLMHVliKGpxcORBnQmmVRe76U58G0ZW58E3ITJg==
   dependencies:
-    vite-plugin-electron-renderer "0.9.0"
+    vite-plugin-electron-renderer "0.9.3"
 
 vite@^3.0.8:
   version "3.1.0"
